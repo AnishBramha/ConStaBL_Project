@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="src"/>
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+    <classpathentry kind="output" path="bin"/>
+    
+    <classpathentry kind="lib" path="lib/commons-scxml-0.9.jar"/>
+    <classpathentry kind="lib" path="lib/commons-jexl-1.1.jar"/>
+    <classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
+    <classpathentry kind="lib" path="lib/commons-digester-1.8.jar"/>
+    <classpathentry kind="lib" path="lib/commons-beanutils-1.7.0.jar"/>
+    <classpathentry kind="lib" path="lib/xalan-2.7.2.jar"/>
+    <classpathentry kind="lib" path="lib/serializer-2.7.2.jar"/>
+</classpath>
