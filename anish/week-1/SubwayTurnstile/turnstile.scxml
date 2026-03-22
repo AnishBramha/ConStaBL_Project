@@ -8,6 +8,6 @@
         <transition event="push" target="locked"/>
     </state>
 
-    </scxml>
+</scxml>
 
 

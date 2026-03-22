@@ -4,6 +4,8 @@
 *.exe
 *.out
 *.aux
+bin
+.DS_Store
 
 
 
