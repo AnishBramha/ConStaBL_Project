@@ -6,6 +6,8 @@ CP = ".:$(LIB_DIR)/commons-scxml-0.9.jar:$(LIB_DIR)/commons-jexl-1.1.jar:$(LIB_D
 
 default: run
 
+all: compile run
+
 compile:
 	mkdir -p bin
 	javac -d bin -cp $(CP) $(SRC)

@@ -28,9 +28,10 @@ public class Converter extends JFrame {
     private JPanel buttonPanel;
 
     public Converter(File xmlFile) {
-        setTitle("Universal SCXML Tester: " + xmlFile.getName());
+
+        setTitle("SCXML Tester: " + xmlFile.getName());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 400);
+        setSize(800, 400);
         setLayout(new BorderLayout());
 
         setupUI();
@@ -52,6 +53,7 @@ public class Converter extends JFrame {
         setVisible(true);
     }
 
+
     private void setupUI() {
 
         stateDisplayLabel = new JLabel("Loading states...", SwingConstants.CENTER);
@@ -62,10 +64,12 @@ public class Converter extends JFrame {
         add(stateDisplayLabel, BorderLayout.CENTER);
 
         buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        buttonPanel.setLayout(new GridLayout(0, 4, 10, 10));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         buttonPanel.setBackground(Color.DARK_GRAY);
         add(buttonPanel, BorderLayout.SOUTH);
     }
+
 
     private void initEngine(File xmlFile) throws Exception {
 
@@ -76,12 +80,16 @@ public class Converter extends JFrame {
         scxmlEngine.go();
     }
 
+
     private void buildDynamicButtons(File xmlFile) throws Exception {
 
         Set<String> uniqueEvents = new HashSet<>();
 
-        Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlFile);
-        NodeList transitions = doc.getElementsByTagName("transition");
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().parse(xmlFile);
+        
+        NodeList transitions = doc.getElementsByTagNameNS("*", "transition");
 
         for (int i = 0; i < transitions.getLength(); i++) {
 
@@ -97,14 +105,11 @@ public class Converter extends JFrame {
 
             JButton btn = new JButton("Fire: " + eventName);
             btn.setFont(new Font("Arial", Font.BOLD, 14));
-            
-            btn.addActionListener(e -> {
-                fireEvent(eventName);
-            });
-            
+            btn.addActionListener(e -> fireEvent(eventName));
             buttonPanel.add(btn);
         }
     }
+
 
     private void fireEvent(String eventName) {
 
@@ -120,9 +125,10 @@ public class Converter extends JFrame {
         }
     }
 
+
     private void updateStateDisplay() {
 
-        Set currentStates = scxmlEngine.getCurrentStatus().getStates();
+        var currentStates = scxmlEngine.getCurrentStatus().getStates();
         
         StringBuilder stateNames = new StringBuilder("<html><center>Active States:<br/>");
 
@@ -136,9 +142,14 @@ public class Converter extends JFrame {
         stateDisplayLabel.setText(stateNames.toString());
     }
 
+
     public static void main(String[] args) {
 
-        try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); } catch (Exception e) {}
+        try { 
+
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+        } catch (Exception e) {}
 
         JFileChooser fileChooser = new JFileChooser(new File("."));
         fileChooser.setDialogTitle("Select an SCXML file to test");
@@ -153,7 +164,7 @@ public class Converter extends JFrame {
         } else {
 
             System.out.println("No file selected. Exiting.");
-            System.exit(0);
+            System.exit(EXIT_ON_CLOSE);
         }
     }
 }

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" initial="red">
+<scxml xmlns="http://www.w3.org/2005/07/scxml" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.w3.org/2005/07/scxml https://www.w3.org/2011/04/SCXML/scxml.xsd" 
+       version="1.0" 
+       initial="red">
+
 
     <state id="red">
         <transition event="timer" target="green"/>
