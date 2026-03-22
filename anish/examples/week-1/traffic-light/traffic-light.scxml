@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" initial="red">
+
+    <state id="red">
+        <transition event="timer" target="green"/>
+        <transition event="power_surge" target="flashing_red"/>
+    </state>
+
+    <state id="green">
+        <transition event="timer" target="yellow"/>
+        <transition event="power_surge" target="flashing_red"/>
+    </state>
+
+    <state id="yellow">
+        <transition event="timer" target="red"/>
+        <transition event="power_surge" target="flashing_red"/>
+    </state>
+
+    <state id="flashing_red">
+        <transition event="repair" target="red"/>
+    </state>
+
+</scxml>
+
+
