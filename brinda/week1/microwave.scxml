@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" initial="Idle">
+
+    <state id="Idle">
+        <transition event="start" target="Cooking"/>
+    </state>
+
+    <state id="Cooking" initial="Heating">
+        <transition event="stop" target="Idle"/>
+        <transition event="door_open" target="Idle"/>
+
+        <state id="Heating">
+            <onentry>
+                <send event="done" delay="10s"/>
+            </onentry>
+            <transition event="done" target="Idle"/>
+        </state>
+
+        <state id="Turntable">
+            </state>
+    </state>
+</scxml>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" initial="KeepTime">
+
+    <state id="KeepTime">
+        <transition event="alarm_trigger" target="AlarmActive"/>
+    </state>
+
+    <state id="AlarmActive" initial="Beeping">
+        <transition event="button_press" target="KeepTime"/>
+
+        <state id="Beeping">
+            <onentry>
+                <send event="silence_gap" delay="1s"/>
+            </onentry>
+            <transition event="silence_gap" target="Silent"/>
+        </state>
+
+        <state id="Silent">
+            <onentry>
+                <send event="beep_repeat" delay="0.5s"/>
+            </onentry>
+            <transition event="beep_repeat" target="Beeping"/>
+        </state>
+    </state>
+</scxml>

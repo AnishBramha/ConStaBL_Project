@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" initial="Stationary">
+
+    <state id="Stationary">
+        <transition event="call" target="Moving"/>
+    </state>
+
+    <state id="Moving" initial="Accelerating">
+        <transition event="emergency_stop" target="Stationary"/>
+
+        <state id="Accelerating">
+            <onentry>
+                <send event="top_speed" delay="2s"/>
+            </onentry>
+            <transition event="top_speed" target="ConstVel"/>
+        </state>
+
+        <state id="ConstVel">
+            <onentry>
+                <send event="approach_floor" delay="5s"/>
+            </onentry>
+            <transition event="approach_floor" target="Stationary"/>
+        </state>
+    </state>
+</scxml>
