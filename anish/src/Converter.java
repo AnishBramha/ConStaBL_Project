@@ -163,7 +163,7 @@ public class Converter extends JFrame {
 
         } else {
 
-            System.out.println("No file selected. Exiting.");
+            System.err.println("No file selected. Exiting.");
             System.exit(EXIT_ON_CLOSE);
         }
     }

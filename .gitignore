@@ -4,7 +4,12 @@
 *.exe
 *.out
 *.aux
+*.nav
+*.snm
+*.toc
+*.vrb
 bin
+build
 .DS_Store
 
 
